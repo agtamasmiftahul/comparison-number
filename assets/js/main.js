@@ -3,12 +3,17 @@ var level0b = document.getElementById('level0b');
 var level1 = document.getElementById('level1');
 var level2 = document.getElementById('level2');
 var level3 = document.getElementById('level3');
+var level4a = document.getElementById('level4a');
+var level4b = document.getElementById('level4b');
 
 var level0Button = document.getElementById('level0-button');
 var level1Button = document.getElementById('level1-button');
 var level2Button = document.getElementById('level2-button');
 var level3Button = document.getElementById('level3-button');
+var level4Button = document.getElementById('level4-button');
+var level5Button = document.getElementById('level5-button');
 
+var result;
 var messageToast;
 var duration;
 
@@ -92,7 +97,67 @@ function verifyAge() {
   }
 }
 
+function calculateArea(length4, width4) {
+  result = Number(length4) * Number(width4);
+  return result;
+}
+
+function showArea() {
+  var length4 = level4a.value;
+  var width4 = level4b.value;
+  if (isNaN(length4) !== true && isNaN(width4) !== true) {
+    if (length4 > 0 && width4 > 0) {
+      calculateArea(length4, width4);
+      showToast(`The length is ${length4} and width is ${width4}. So, the area is ${result}`, 1000);
+    } else if (length4 > 0 && width4 <= 0) {
+      showToast(`Please, input number greater than 0 for width`, 1000);
+    } else if (length4 <= 0 && width4 > 0) {
+      showToast(`Please, input number greater than 0 for length`, 1000);
+    } else {
+      showToast(`Please, input number greater than 0 for length and width`, 1000);
+    }
+  } else if (isNaN(length4) !== true && isNaN(width4) === true) {
+    showToast('Your first input is a number, but your second input is not a number. Please, input a number', 1000);
+  } else if (isNaN(length4) === true && isNaN(width4) !== true) {
+    showToast('Your second input is a number, but your first input is not a number. Please, input a number', 1000);
+  } else {
+    showToast('Please, input a number', 1000);
+  }
+}
+
+function randomGenerator(firstNumber, lastNumber) {
+  result = Math.floor(Math.random() * (lastNumber - firstNumber + 1)) + firstNumber;
+  return result;
+}
+
+function showNumber() {
+  var firstNumber = level5a.value;
+  var lastNumber = level5b.value;
+  if (isNaN(firstNumber) !== true && isNaN(lastNumber) !== true) {
+    if (firstNumber > 0 && lastNumber > 0) {
+      firstNumber = Number(firstNumber);
+      lastNumber = Number(lastNumber);
+      randomGenerator(firstNumber, lastNumber);
+      showToast(`Your new number is ${result}`, 1000);
+    } else if (firstNumber > 0 && lastNumber <= 0) {
+      showToast(`Please, input number greater than 0 for last number`, 1000);
+    } else if (firstNumber <= 0 && lastNumber > 0) {
+      showToast(`Please, input number greater than 0 for first number`, 1000);
+    } else {
+      showToast(`Please, input number greater than 0 for length and width`, 1000);
+    }
+  } else if (isNaN(firstNumber) !== true && isNaN(lastNumber) === true) {
+    showToast('Your first input is a number, but your second input is not a number. Please, input a number', 1000);
+  } else if (isNaN(firstNumber) === true && isNaN(lastNumber) !== true) {
+    showToast('Your second input is a number, but your first input is not a number. Please, input a number', 1000);
+  } else {
+    showToast('Please, input a number', 1000);
+  }
+}
+
 level0Button.addEventListener(`click`, compare);
 level1Button.addEventListener(`click`, verify);
 level2Button.addEventListener(`click`, ternaryOperator);
-level3Button.addEventListener(`click`, verifyAge)
+level3Button.addEventListener(`click`, verifyAge);
+level4Button.addEventListener(`click`, showArea);
+level5Button.addEventListener(`click`, showNumber);
